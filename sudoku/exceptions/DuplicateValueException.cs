@@ -3,8 +3,8 @@ namespace sudoku.exceptions
 {
 	public class DuplicateValueException : Exception
 	{
-        public DuplicateValueException(int row, int col)
-            : base($"Duplicated value in position ({row}, {col})")
+        public DuplicateValueException()
+            : base($"Duplicated value in one of the rows, columns or subgrids")
         {
         }
     }
