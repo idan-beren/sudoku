@@ -29,17 +29,15 @@ namespace sudoku.board
         // convert the string into a grid
         private void stringToGrid(string stringGrid)
         {
-            int row = 0, col = 0;
-            for (int index = 0; index < stringGrid.Length; index++)
-            {
-                if (index % ROW_SIZE == 0 && index != 0)
-                {
-                    row++;
-                    col = 0;
-                }
-                cells[row, col].Value = stringGrid[index];
-                col++;
-            }
+            for (int row = 0; row < ROW_SIZE; row++)
+                for (int col = 0; col < COL_SIZE; col++)
+                    cells[row, col] = new Cell(stringGrid[row * ROW_SIZE + col], ROW_SIZE);
+        }
+
+        // getter for the cells matrix
+        public Cell[,] Cells
+        {
+            get { return cells; }
         }
 
         // getter for the row size
