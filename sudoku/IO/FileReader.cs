@@ -4,7 +4,7 @@ namespace sudoku.IO
 	public class FileReader : IReader
 	{
         // gets an input from the user by a file
-		public string readInput()
+		public string ReadInput()
 		{
 			string filePath = Console.ReadLine();
             try
