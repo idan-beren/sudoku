@@ -9,3 +9,4 @@ namespace sudoku.exceptions
         }
     }
 }
+
