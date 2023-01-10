@@ -2,11 +2,11 @@
 
 namespace sudoku.IO
 {
-	public class ConsoleWriter : IWriter
-	{
+    public class ConsoleWriter : IWriter
+    {
         /* gets a grid object and prints it into the console*/
-		public void WriteGrid(byte[,] grid)
-		{
+        public void WriteGrid(byte[,] grid)
+        {
             int gridSize = grid.GetLength(0);
             int subgridSize = (int)Math.Sqrt(gridSize);
             Console.WriteLine();
@@ -21,6 +21,5 @@ namespace sudoku.IO
                 if ((row + 1) % subgridSize == 0) Console.WriteLine();
             }
         }
-	}
+    }
 }
-

@@ -1,12 +1,12 @@
 ﻿using System;
 namespace sudoku.IO
 {
-	public class FileReader : IReader
-	{
+    public class FileReader : IReader
+    {
         // gets an input from the user by a file
-		public string readInput()
-		{
-			string filePath = Console.ReadLine();
+        public string ReadInput()
+        {
+            string filePath = Console.ReadLine();
             try
             {
                 using (StreamReader reader = new StreamReader(filePath))

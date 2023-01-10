@@ -2,12 +2,12 @@
 
 namespace sudoku.IO
 {
-	public class FileWriter : IWriter
-	{
+    public class FileWriter : IWriter
+    {
         /* gets a grid object and prints it into a file*/
         public void WriteGrid(byte[,] grid)
-		{
-			string path = "/Users/idan.beren/Projects/sudoku/sudoku/solutions/result.txt";
+        {
+            string path = "/Users/idan.beren/Projects/sudoku/sudoku/solutions/result.txt";
             using (StreamWriter sw = new StreamWriter(path))
             {
                 int gridSize = grid.GetLength(0);
@@ -26,6 +26,5 @@ namespace sudoku.IO
             }
 
         }
-	}
+    }
 }
-
