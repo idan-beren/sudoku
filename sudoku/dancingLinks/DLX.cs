@@ -7,7 +7,7 @@ namespace sudoku.dancingLinks
     /* class of quadruple chained list representing the cover matrix that has 
      already created in the converter class */
     public class DLX
-	{
+    {
         private ColumnNode header; // pointer to the start of the quadruple list
         private List<DancingNode> answer; // list that represents the answer
         private List<DancingNode> result; // list that represents the result
@@ -18,14 +18,14 @@ namespace sudoku.dancingLinks
          dlx list and stores the start of it un the header, caculates the size
          of the grid and calls the Search method */
         public DLX(byte[,] coverMatrix)
-		{
+        {
             answer = new List<DancingNode>();
             result = new List<DancingNode>();
             header = CreatDLXList(coverMatrix);
             SIZE = (int)Math.Pow(coverMatrix.Length / AMOUNT_OF_CONSTRAINTS, 1.0 / 5);
             Search(0);
         }
-        
+
         /* converts a cover matrix into a quadruple chained list that will
          represent the cover matrix */
         private ColumnNode CreatDLXList(byte[,] coverMatrix)
@@ -138,6 +138,43 @@ namespace sudoku.dancingLinks
                 col = (ColumnNode)col.right;
             }
             return minColumn;
+        }
+
+        /* converts the list of the result into a matrix that will represent the 
+         solved sudoku grid */
+        public byte[,] DLXListToMatrix()
+        {
+            byte[,] matrix = new byte[SIZE, SIZE];
+
+            // iterates over the nodes in the result list
+            while (result.Count != 0)
+            {
+                DancingNode resultNode = result[0];
+                result.RemoveAt(0);
+                DancingNode index = resultNode.right;
+
+                // iterates over the columns 
+                while (index != resultNode)
+                {
+
+                    // finds the node in the result list that corresponds to the lowest column name
+                    if ((index.column != null && resultNode.column != null) &&
+                        (Int32.Parse(index.column.name) < Int32.Parse(resultNode.column.name)))
+                        resultNode = index;
+                    index = index.right;
+                }
+
+                // extracts the row, column, and value of the solution from the retrieved node's column name
+                int resultNodeName = (int)Int32.Parse(resultNode.column?.name ?? "0");
+                int nextNodeName = (int)Int32.Parse(resultNode.right?.column?.name ?? "0");
+                int resultRow = resultNodeName / SIZE;
+                int resultCol = resultNodeName % SIZE;
+                byte resultValue = (byte)(nextNodeName % SIZE + 1);
+
+                // stores the value in the appropriate position in the matrix
+                matrix[resultRow, resultCol] = resultValue;
+            }
+            return matrix;
         }
     }
 }
