@@ -25,5 +25,53 @@ namespace sudoku.dancingLinks
 		{
 			this.column = column;
 		}
+
+        // links a node under the current node
+        public DancingNode LinkDown(DancingNode node)
+        {
+            node.bottom = bottom;
+            node.bottom.top = node;
+            node.top = this;
+            bottom = node;
+            return node;
+        }
+
+        /* links a node right to the current node */
+        public DancingNode LinkRight(DancingNode node)
+        {
+            node.right = right;
+            node.right.left = node;
+            node.left = this;
+            right = node;
+            return node;
+        }
+
+        // disconects the links between the node and the two nodes at its sides
+        public void DisconectLeftAndRight()
+        {
+            left.right = right;
+            right.left = left;
+        }
+
+        // reconnects the links between the node and the two nodes at its sides
+        public void ReconnectLeftAndRight()
+        {
+            left.right = this;
+            right.left = this;
+        }
+
+        // disconects the links between the node and the two nodes above and below it
+        public void DisconectTopAndBottom()
+        {
+            top.bottom = bottom;
+            bottom.top = top;
+        }
+
+        // reconnects the links between the node and the two nodes above and below it
+        public void ReconnectTopAndBottom()
+        {
+            top.bottom = this;
+            bottom.top = this;
+        }
     }
 }
