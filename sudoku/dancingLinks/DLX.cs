@@ -23,6 +23,7 @@ namespace sudoku.dancingLinks
             result = new List<DancingNode>();
             header = CreatDLXList(coverMatrix);
             SIZE = (int)Math.Pow(coverMatrix.Length / AMOUNT_OF_CONSTRAINTS, 1.0 / 5);
+            Search(0);
         }
         
         /* converts a cover matrix into a quadruple chained list that will
@@ -67,6 +68,76 @@ namespace sudoku.dancingLinks
             }
             headerNode.size = numberOfColumns;
             return headerNode;
+        }
+
+        /* recursive search method which stores into the result list the 
+         nodes that represent the solution of the sudoku grid.
+         the depth parameter represents the depth of the search.
+         the method returns true when a solution has been found,
+         otherwise false */
+        private bool Search(int depth)
+        {
+            // the search is over and the solution has been found, returns true
+            if (header.right == header)
+            {
+                result = new List<DancingNode>(answer);
+                return true;
+            }
+
+            // selects the column node with the fewest number of nodes and "covers" it
+            ColumnNode column = ChooseColumnNode();
+            column.Cover();
+
+            // iterates over the rows in the column
+            DancingNode row = column.bottom;
+            while (row != column)
+            {
+                // adds the row node into the answer list and "covers" intersected nodes
+                answer.Add(row);
+                DancingNode index1 = row.right;
+                while (index1 != row)
+                {
+                    index1.column?.Cover();
+                    index1 = index1.right;
+                }
+
+                // calls itself recursively, passing in depth+1
+                if (Search(depth + 1)) return true;
+
+                // removes the node from the answer list and "uncovers" intersected nodes
+                row = answer[answer.Count - 1];
+                answer.RemoveAt(answer.Count - 1);
+                column = row.column ?? column;
+                DancingNode index2 = row.left;
+                while (index2 != row)
+                {
+                    index2.column?.Uncover();
+                    index2 = index2.left;
+                }
+                row = row.bottom;
+            }
+
+            // "uncovers" the column node and returns false
+            column.Uncover();
+            return false;
+        }
+
+        /* chooses the column node with the fewest number of dancing nodes 
+         (= minimum size) that occurring in a column */
+        private ColumnNode ChooseColumnNode()
+        {
+            ColumnNode minColumn = (ColumnNode)header.right;
+            ColumnNode col = (ColumnNode)header.right;
+
+            // iterates over each column
+            while (col != header)
+            {
+
+                // finds the column with the lowest size
+                if (col.size < minColumn.size) minColumn = col;
+                col = (ColumnNode)col.right;
+            }
+            return minColumn;
         }
     }
 }
