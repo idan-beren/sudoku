@@ -10,8 +10,9 @@ namespace sudoku
     {
         static void Main(string[] args)
         {
-            IReader reader = new ConsoleReader();
-            string input = reader.ReadInput();
+            userCommunication communication = new userCommunication();
+            communication.recive();
+            string input = communication.Input;
             Validator validator = new Validator();
             try
             {
@@ -29,8 +30,7 @@ namespace sudoku
             }
             DLXSolver dlxSolver = new DLXSolver();
             byte[,] result = dlxSolver.Solve(input);
-            IWriter writer = new ConsoleWriter();
-            writer.WriteGrid(result);
+            communication.send(result);
         }
     }
 }

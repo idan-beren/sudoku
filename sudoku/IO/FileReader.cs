@@ -6,6 +6,7 @@ namespace sudoku.IO
         // gets an input from the user by a file
         public string ReadInput()
         {
+            Console.WriteLine("enter the path of the file");
             string filePath = Console.ReadLine();
             try
             {
