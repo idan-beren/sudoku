@@ -1,33 +1,36 @@
 ﻿using System;
-using sudoku.board;
-using sudoku.solving;
 using sudoku.IO;
-using System.ComponentModel.DataAnnotations;
+using sudoku.validating;
 using System.Reflection.PortableExecutable;
-
+using sudoku.dancingLinks;
+using sudoku.exceptions;
 namespace sudoku
 {
     public class Program
     {
         static void Main(string[] args)
         {
-            while (true)
+            IReader reader = new ConsoleReader();
+            string input = reader.ReadInput();
+            Validator validator = new Validator();
+            try
             {
-                IReader consoleReader = new ConsoleReader();
-                string input = consoleReader.readInput();
-                //IReader fileReader = new FileReader();
-                //string input = fileReader.readInput();
-
-
-
-
-                Grid grid = new Grid(input);
-                Solver solver = new Solver(grid);
-                solver.solveGrid();
-                Grid newGrid = solver.Grid;
-                Writer writer = new Writer();
-                writer.writeGrid(newGrid);
+                validator.ValidateStringGrid(input);
             }
+            catch (InvalidCharacterException ice)
+            {
+                Console.WriteLine(ice.Message);
+                return;
+            }
+            catch (InvalidGridSizeException igse)
+            {
+                Console.WriteLine(igse.Message);
+                return;
+            }
+            DLXSolver dlxSolver = new DLXSolver();
+            byte[,] result = dlxSolver.Solve(input);
+            IWriter writer = new ConsoleWriter();
+            writer.WriteGrid(result);
         }
     }
 }
