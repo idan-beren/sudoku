@@ -16,9 +16,12 @@ namespace sudoku
                 communication.recive();
                 string input = communication.Input;
                 Validator validator = new Validator();
+                Converter converter = new Converter(input);
+                converter.StringToMatrix();
                 try
                 {
                     validator.ValidateStringGrid(input);
+                    validator.ValidateGrid(converter.Matrix);
                 }
                 catch (InvalidCharacterException ice)
                 {
@@ -28,6 +31,11 @@ namespace sudoku
                 catch (InvalidGridSizeException igse)
                 {
                     Console.WriteLine(igse.Message);
+                    continue;
+                }
+                catch (DuplicateValueException dve)
+                {
+                    Console.WriteLine(dve.Message);
                     continue;
                 }
                 DLXSolver dlxSolver = new DLXSolver();

@@ -40,50 +40,39 @@ namespace sudoku.validating
 		 row, column or subgrid, otherwise false*/
         private bool ValidateDuplicates(byte[,] grid)
         {
-            for (int index = 0; index < grid.GetLength(0); index++)
-                if (!ValidateRow(grid, index) || !ValidateCol(grid, index) || !ValidateSubgrid(grid, index)) return false;
-            return true;
-        }
-
-        /* returns true if there are not duplicates in any of the rows */
-        private bool ValidateRow(byte[,] grid, int row)
-        {
-            int size = grid.GetLength(0);
-            int[] rowFlag = new int[size];
-            for (int col = 0; col < size; col++)
-                if (grid[row, col] != 0) rowFlag[grid[row, col] - 1]++;
-            return CheckFlag(rowFlag);
-        }
-
-        /* returns true if there are not duplicates in any of the columns */
-        private bool ValidateCol(byte[,] grid, int col)
-        {
-            int size = grid.GetLength(1);
-            int[] colFlag = new int[size];
-            for (int row = 0; row < size; row++)
-                if (grid[row, col] != 0) colFlag[grid[row, col] - 1]++;
-            return CheckFlag(colFlag);
-        }
-
-        /* returns true if there are not duplicates in any of the subgrids */
-        private bool ValidateSubgrid(byte[,] grid, int index)
-        {
+            /* initializes grid and subgrid sizes, and the arrays that indicates 
+             if there are duplicates in the rows, columns and subgrids */
             int gridSize = grid.GetLength(0);
             int subgridSize = (int)Math.Sqrt(gridSize);
-            int[] subgridFlag = new int[gridSize];
-            int newIndex = index / subgridSize;
-            for (int row = newIndex * subgridSize; row < newIndex * subgridSize + subgridSize; row++)
-                for (int col = newIndex * subgridSize; col < newIndex * subgridSize + subgridSize; col++)
-                    if (grid[row, col] != 0) subgridFlag[grid[row, col] - 1]++;
-            return CheckFlag(subgridFlag);
-        }
+            int[,] rowsFlag = new int[gridSize, gridSize];
+            int[,] colsFlag = new int[gridSize, gridSize];
+            int[,] subgridsFlag = new int[gridSize, gridSize];
 
-        /* returns false if there are items in the array that bigger then one,
-         otherwise returns true */
-        private bool CheckFlag(int[] flag)
-        {
-            for (int item = 0; item < flag.Length; item++)
-                if (flag[item] > 1) return false;
+            // iterates over each row
+            for (int row = 0; row < gridSize; row++)
+            {
+                // iterates over each col
+                for (int col = 0; col < gridSize; col++)
+                {
+                    int subgrid = (row / subgridSize) * subgridSize + (col / subgridSize);
+
+                    // for each cell that is not empty (equals zero)
+                    if (grid[row, col] != 0)
+                    {
+                        // updates the flag arrays
+                        if (rowsFlag[row, grid[row, col] - 1] == 0 &&
+                            colsFlag[col, grid[row, col] - 1] == 0 &&
+                            subgridsFlag[subgrid, grid[row, col] - 1] == 0)
+                        {
+                            rowsFlag[row, grid[row, col] - 1] = 1;
+                            colsFlag[col, grid[row, col] - 1] = 1;
+                            subgridsFlag[subgrid, grid[row, col] - 1] = 1;
+                        }
+                        else
+                            return false; 
+                    }
+                }
+            }
             return true;
         }
     }

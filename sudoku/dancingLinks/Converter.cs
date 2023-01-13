@@ -30,13 +30,11 @@ namespace sudoku.dancingLinks
 		
 		/* converts a string which represents the sudoku grid into a matrix
 		 which represents the sudoku grid */
-		private void StringToMatrix()
+		public void StringToMatrix()
 		{
 			for (int row = 0; row < GRID_SIZE; row++)
 				for (int col = 0; col < GRID_SIZE; col++)
 					matrix[row, col] = (byte)(input[row * GRID_SIZE + col] - '0');
-            Validator validator = new Validator(); //
-            validator.ValidateGrid(matrix); //
         }
 
 		/* converts a matrix into a cover matrix -
@@ -59,7 +57,7 @@ namespace sudoku.dancingLinks
                 // iterates over each column of the matrix
                 for (int col = 0; col < GRID_SIZE; col++)
 				{
-					int subgridPosition = (row / SUBGRID_SIZE) * SUBGRID_SIZE + col / SUBGRID_SIZE;
+					int subgridPosition = (row / SUBGRID_SIZE) * SUBGRID_SIZE + (col / SUBGRID_SIZE);
 
                     // for each cell in the matrix iterates over a range of (1 - GRID_SIZE+1)
                     for (int option = 1; option < GRID_SIZE + 1; option++)
@@ -86,13 +84,18 @@ namespace sudoku.dancingLinks
             }
         }
 
-        /* calls stringToMatrix() and matrixToCoverMatrix() and returns 
+        /* calls matrixToCoverMatrix() and returns 
          the cover matrix*/
         public byte[,] GetCoverMatrix()
 		{
-			StringToMatrix();
 			MatrixToCoverMatrix();
 			return coverMatrix;
+		}
+
+		// getter for the grid matrix
+		public byte[,] Matrix
+		{
+			get { return matrix; }
 		}
 
         /* converts a matrix which represents the sulotion of the sudoku
