@@ -4,7 +4,7 @@ namespace sudoku.exceptions
 	public class DuplicateValueException : Exception
 	{
         public DuplicateValueException()
-            : base($"Duplicated value in one of the rows, columns or subgrids")
+            : base($"Duplicated value in one of the rows, columns or subgrids\n")
         {
         }
     }

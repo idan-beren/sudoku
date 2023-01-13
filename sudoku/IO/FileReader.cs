@@ -15,22 +15,22 @@ namespace sudoku.IO
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("Could not find the file");
+                Console.WriteLine("Could not find the file\n");
                 return string.Empty;
             }
             catch (IOException)
             {
-                Console.WriteLine("Could not read the file properly");
+                Console.WriteLine("Could not read the file properly\n");
                 return string.Empty;
             }
             catch (UnauthorizedAccessException)
             {
-                Console.WriteLine("Could not access the file");
+                Console.WriteLine("Could not access the file\n");
                 return string.Empty;
             }
             catch (ArgumentException)
             {
-                Console.WriteLine("The value cannot be an empty string");
+                Console.WriteLine("The value cannot be an empty string\n");
                 return string.Empty;
             }
         }

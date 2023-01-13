@@ -9,11 +9,12 @@ namespace sudoku.IO
         /* constructor - initializes the choice and the input */
         public userCommunication()
 		{
-			choice = "";
-			input = "";
+			choice = string.Empty;
+			input = string.Empty;
 		}
 
-        /* gets from the user the  */
+        /* asks the user, which option they want to pass the string grid by
+         and gets the input from the user. then returns the string */
 		public void recive()
 		{
             Console.WriteLine("enter the number of the option you want\n" +
@@ -41,7 +42,7 @@ namespace sudoku.IO
             }
         }
 
-        /* */
+        /* gets a sudoku grid and prints it according to the choice of the user */
         public void send(byte[,] grid)
         {
             if (choice == "2")

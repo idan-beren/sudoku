@@ -1,4 +1,6 @@
 ﻿using System;
+using sudoku.validating;
+
 namespace sudoku.dancingLinks
 {
     /* gets a string which represents the sudoku grid, then converts it into
@@ -24,7 +26,7 @@ namespace sudoku.dancingLinks
             matrix = new byte[GRID_SIZE, GRID_SIZE];
 			coverMatrix = new byte[GRID_SIZE * GRID_SIZE * GRID_SIZE, GRID_SIZE * GRID_SIZE * AMOUNT_OF_CONSTRAINTS];
         }
-
+		
 		/* converts a string which represents the sudoku grid into a matrix
 		 which represents the sudoku grid*/
 		private void StringToMatrix()
@@ -32,6 +34,8 @@ namespace sudoku.dancingLinks
 			for (int row = 0; row < GRID_SIZE; row++)
 				for (int col = 0; col < GRID_SIZE; col++)
 					matrix[row, col] = (byte)(input[row * GRID_SIZE + col] - '0');
+            Validator validator = new Validator(); //
+            validator.ValidateGrid(matrix); //
         }
 
 		/* converts a matrix into a cover matrix -
