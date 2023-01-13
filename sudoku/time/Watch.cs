@@ -3,31 +3,32 @@ using System.Diagnostics;
 
 namespace sudoku
 {
+    /* class of a stopwatch */
     class Watch
     {
-        private Stopwatch stopwatch;
+        private Stopwatch stopwatch; // stopwatch
 
+        // constructor - initializes the stopwatch
         public Watch()
         {
-            // Create a stopwatch
             stopwatch = new Stopwatch();
         }
 
+        // starts the stopwatch
         public void Start()
         {
-            // Start the stopwatch
             stopwatch.Start();
         }
 
+        // stops the stopwatch
         public void Stop()
         {
-            // Stop the stopwatch
             stopwatch.Stop();
         }
 
+        // returns the elapsed time in milliseconds
         public double GetElapsedTime()
         {
-            // Return the elapsed time
             return stopwatch.Elapsed.TotalMilliseconds;
         }
     }

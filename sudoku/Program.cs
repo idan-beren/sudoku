@@ -31,8 +31,17 @@ namespace sudoku
                     continue;
                 }
                 DLXSolver dlxSolver = new DLXSolver();
-                byte[,] result = dlxSolver.Solve(input);
-                communication.send(result);
+                try
+                {
+                    dlxSolver.Solve(input);
+                }
+                catch (UnsolvableGridException uge)
+                {
+                    Console.WriteLine(uge.Message);
+                    continue;
+                }
+                if (dlxSolver.ResultMatrix != null)
+                    communication.send(dlxSolver.ResultMatrix);
             }
         }
     }

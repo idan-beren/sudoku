@@ -23,7 +23,6 @@ namespace sudoku.dancingLinks
             result = new List<DancingNode>();
             header = CreatDLXList(coverMatrix);
             SIZE = (int)Math.Pow(coverMatrix.Length / AMOUNT_OF_CONSTRAINTS, 1.0 / 5);
-            Search(0);
         }
 
         /* converts a cover matrix into a quadruple chained list that will
@@ -72,10 +71,9 @@ namespace sudoku.dancingLinks
 
         /* recursive search method which stores into the result list the 
          nodes that represent the solution of the sudoku grid.
-         the depth parameter represents the depth of the search.
          the method returns true when a solution has been found,
          otherwise false */
-        private bool Search(int depth)
+        public bool Search()
         {
             // the search is over and the solution has been found, returns true
             if (header.right == header)
@@ -101,8 +99,8 @@ namespace sudoku.dancingLinks
                     index1 = index1.right;
                 }
 
-                // calls itself recursively, passing in depth+1
-                if (Search(depth + 1)) return true;
+                // calls itself recursively
+                if (Search()) return true;
 
                 // removes the node from the answer list and "uncovers" intersected nodes
                 row = answer[answer.Count - 1];

@@ -6,7 +6,8 @@ namespace sudoku.dancingLinks
     /* gets a string which represents the sudoku grid, then converts it into
 	 a matrix which represents the sudoku grid, then converts it into
 	 a spare cover matrix which represents the options to fill the empty values
-	 in the sudoku grid*/
+	 in the sudoku grid. then after the dlx and dlx solver classes solve the grid
+	 it converts it from a matrix into a string that represents the solution */
     public class Converter
 	{
 		private int GRID_SIZE; // size of the sudoku grid
@@ -28,7 +29,7 @@ namespace sudoku.dancingLinks
         }
 		
 		/* converts a string which represents the sudoku grid into a matrix
-		 which represents the sudoku grid*/
+		 which represents the sudoku grid */
 		private void StringToMatrix()
 		{
 			for (int row = 0; row < GRID_SIZE; row++)
@@ -93,5 +94,16 @@ namespace sudoku.dancingLinks
 			MatrixToCoverMatrix();
 			return coverMatrix;
 		}
+
+        /* converts a matrix which represents the sulotion of the sudoku
+         grid into a string which represents it too */
+        public string MatrixToString(byte[,] matrix)
+		{
+			string stringMatrix = string.Empty;
+			for (int row = 0; row < GRID_SIZE; row++)
+				for (int col = 0; col < GRID_SIZE; col++)
+					stringMatrix += matrix[row, col];
+			return stringMatrix;
+        }
 	}
 }
