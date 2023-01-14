@@ -41,7 +41,7 @@ namespace sudoku
                 DLXSolver dlxSolver = new DLXSolver();
                 try
                 {
-                    dlxSolver.Solve(input);
+                    dlxSolver.Solve(input); 
                 }
                 catch (UnsolvableGridException uge)
                 {

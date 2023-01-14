@@ -24,6 +24,7 @@ namespace sudoku.dancingLinks
             Watch watch = new Watch();
             watch.Start();
             Converter converter = new Converter(input);
+            converter.StringToMatrix();
             DLX dlx = new DLX(converter.GetCoverMatrix());
             if (!dlx.Search()) throw new UnsolvableGridException();
             resultMatrix = dlx.DLXListToMatrix();
