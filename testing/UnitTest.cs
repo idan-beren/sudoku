@@ -1,12 +1,15 @@
 ﻿using sudoku.dancingLinks;
 using sudoku.validating;
 using sudoku.exceptions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace testing;
 
 /* class to test the sudoku project */
+[TestClass]
 public class UnitTest
 {
-    [Fact]
+    [TestMethod]
     public void TestCorrect9X9SudokuGrid()
     {
         // arange
@@ -16,12 +19,12 @@ public class UnitTest
         // act
         DLXSolver dLXSolver = new DLXSolver();
         string result = dLXSolver.Solve(input);
-         
+
         // assert
-        Assert.Equal(output, result);
+        Assert.AreEqual(output, result);
     }
 
-    [Fact]
+    [TestMethod]
     public void TestCorrect16X16SudokuGrid()
     {
         // arange
@@ -33,10 +36,10 @@ public class UnitTest
         string result = dLXSolver.Solve(input);
 
         // assert
-        Assert.Equal(output, result);
+        Assert.AreEqual(output, result);
     }
 
-    [Fact]
+    [TestMethod]
     public void TestInorrect9X9SudokuGrid()
     {
         // arange
@@ -46,10 +49,10 @@ public class UnitTest
         Validator validator = new Validator();
 
         // assert
-        Assert.Throws<InvalidCharacterException>(() => validator.ValidateStringGrid(input));
+        Assert.ThrowsException<InvalidCharacterException>(() => validator.ValidateStringGrid(input));
     }
 
-    [Fact]
+    [TestMethod]
     public void TestInorrectSizeOfSudokuGrid()
     {
         // arange
@@ -59,10 +62,10 @@ public class UnitTest
         Validator validator = new Validator();
 
         // assert
-        Assert.Throws<InvalidGridSizeException>(() => validator.ValidateStringGrid(input));
+        Assert.ThrowsException<InvalidGridSizeException>(() => validator.ValidateStringGrid(input));
     }
 
-    [Fact]
+    [TestMethod]
     public void TestDuplicatesIn9X9SudokuGrid()
     {
         // arange
@@ -75,6 +78,6 @@ public class UnitTest
         byte[,] grid = converter.Matrix;
 
         // assert
-        Assert.Throws<DuplicateValueException>(() => validator.ValidateGrid(grid));
+        Assert.ThrowsException<DuplicateValueException>(() => validator.ValidateGrid(grid));
     }
 }
