@@ -4,7 +4,7 @@ namespace sudoku.IO
 {
     public interface IWriter
     {
-        // writes the solution to the user
-        public void WriteGrid(byte[,] grid);
+        // writes the output to the user
+        public void WriteOutput(string output);
     }
 }

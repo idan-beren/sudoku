@@ -4,7 +4,13 @@ namespace sudoku.IO
 {
     public class ConsoleWriter : IWriter
     {
-        /* gets a grid object and prints it into the console*/
+        /* gets a solution string grid and prints in into the console */
+        public void WriteOutput(string output)
+        {
+            Console.WriteLine("\n" + output);
+        }
+
+        /* gets a sudoku grid and prints it into the console */
         public void WriteGrid(byte[,] grid)
         {
             int gridSize = grid.GetLength(0);

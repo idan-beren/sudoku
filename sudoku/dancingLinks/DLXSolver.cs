@@ -26,7 +26,13 @@ namespace sudoku.dancingLinks
             Converter converter = new Converter(input);
             converter.StringToMatrix();
             DLX dlx = new DLX(converter.GetCoverMatrix());
-            if (!dlx.Search()) throw new UnsolvableGridException();
+            if (!dlx.Search())
+            {
+                watch.Stop();
+                Console.WriteLine("\nElapsed time: {0} milliseconds",
+                        watch.GetElapsedTime());
+                throw new UnsolvableGridException();
+            }
             resultMatrix = dlx.DLXListToMatrix();
             watch.Stop();
             Console.WriteLine("\nElapsed time: {0} milliseconds",

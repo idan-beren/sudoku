@@ -105,7 +105,7 @@ namespace sudoku.dancingLinks
 			string stringMatrix = string.Empty;
 			for (int row = 0; row < GRID_SIZE; row++)
 				for (int col = 0; col < GRID_SIZE; col++)
-					stringMatrix += matrix[row, col];
+					stringMatrix += (char)(matrix[row, col] + '0');
 			return stringMatrix;
         }
 	}

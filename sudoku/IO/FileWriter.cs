@@ -1,30 +1,34 @@
 ﻿using System;
-
+using sudoku.exceptions;
 namespace sudoku.IO
 {
     public class FileWriter : IWriter
     {
-        /* gets a grid object and prints it into a file*/
-        public void WriteGrid(byte[,] grid)
+        private const string path = "/Users/idan.beren/Projects/sudoku/sudoku/solutions/result.txt";
+
+        /* gets a solution string grid and prints it into a file 
+         and handles exceptions */
+        public void WriteOutput(string output)
         {
-            string path = "/Users/idan.beren/Projects/sudoku/sudoku/solutions/result.txt";
-            using (StreamWriter sw = new StreamWriter(path))
+            bool flag = true;
+            try
             {
-                int gridSize = grid.GetLength(0);
-                int subgridSize = (int)Math.Sqrt(gridSize);
-                Console.WriteLine();
-                for (int row = 0; row < gridSize; row++)
+                using (StreamWriter sw = new StreamWriter(path))
                 {
-                    for (int col = 0; col < gridSize; col++)
-                    {
-                        sw.Write(" " + (char)(grid[row, col] + '0'));
-                        if ((col + 1) % subgridSize == 0) sw.Write(" ");
-                    }
-                    sw.WriteLine();
-                    if ((row + 1) % subgridSize == 0) sw.WriteLine();
+                    sw.Write(output);
                 }
             }
-
+            catch (DirectoryNotFoundException)
+            {
+                Console.WriteLine("Could not find the file to print to\n");
+                flag = false;
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("Could not write to the file properly\n");
+                flag = false;
+            }
+            if (!flag) throw new FileException();
         }
     }
 }

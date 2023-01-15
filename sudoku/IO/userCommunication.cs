@@ -43,15 +43,16 @@ namespace sudoku.IO
         }
 
         /* gets a sudoku grid and prints it according to the choice of the user */
-        public void send(byte[,] grid)
+        public void send(byte[,] grid, string output)
         {
+            ConsoleWriter consoleWriter = new ConsoleWriter();
+            consoleWriter.WriteOutput(output);
+            consoleWriter.WriteGrid(grid);
             if (choice == "2")
             {
                 IWriter fileWriter = new FileWriter();
-                fileWriter.WriteGrid(grid);
+                fileWriter.WriteOutput(output);
             }
-            IWriter consoleWriter = new ConsoleWriter();
-            consoleWriter.WriteGrid(grid);
         }
 
         // getter for the input
