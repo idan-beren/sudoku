@@ -14,8 +14,8 @@ This rules will represent the constrains in the algorithm.
 * Each column must contain all of the digits from 1 to 9.
 * Each of the nine 3x3 sub-grids must contain all of the digits from 1 to 9.
 
-Since this projest is capable of solving different sizes of sudoku grid
-the number that can be filled in the cells and the size of the subgrid 
+Since this projest is capable of solving different sizes of sudoku grids
+the number that can be filled in the cells and the size of the subgrids
 will be diferent in every size of a sudoku grid.
 
 
