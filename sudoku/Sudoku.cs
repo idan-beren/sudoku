@@ -29,7 +29,7 @@ namespace sudoku
             while (true)
             {
                 if (!Reading()) continue;
-                if (!Validation(input)) continue;
+                if (!Validating(input)) continue;
                 if (!Solving(input)) continue;
                 if (!Writing()) continue;
             }
@@ -41,7 +41,7 @@ namespace sudoku
         {
             try
             {
-                communication.recive();
+                communication.Recive();
             }
             catch (FileException)
             {
@@ -58,7 +58,7 @@ namespace sudoku
             try
             {
                 if (dlxSolver.ResultMatrix != null)
-                    communication.send(dlxSolver.ResultMatrix, output);
+                    communication.Send(dlxSolver.ResultMatrix, output);
             }
             catch (FileException)
             {
@@ -85,7 +85,7 @@ namespace sudoku
 
         /* validates the sudoku string and grid and handles exceptions. 
          returns false if an exception were occured, true otherwise */
-        private bool Validation(string input)
+        private bool Validating(string input)
         {
             Validator validator = new Validator();
             Converter converter = new Converter(input);

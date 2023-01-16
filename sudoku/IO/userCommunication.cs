@@ -16,7 +16,7 @@ namespace sudoku.IO
 
         /* asks the user, which option they want to pass the string grid by
          and gets the input from the user. then returns the string */
-		public void recive()
+		public void Recive()
 		{
             Console.WriteLine("enter the number of the option you want\n" +
                 "1: input by the console\n" +
@@ -38,13 +38,13 @@ namespace sudoku.IO
                     break;
                 default:
                     Console.WriteLine("invalid option\n");
-                    recive();
+                    Recive();
                     break;
             }
         }
 
         /* gets a sudoku grid and prints it according to the choice of the user */
-        public void send(byte[,] grid, string output)
+        public void Send(byte[,] grid, string output)
         {
             ConsoleWriter consoleWriter = new ConsoleWriter();
             consoleWriter.WriteOutput(output);
