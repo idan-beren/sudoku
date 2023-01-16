@@ -2,6 +2,7 @@
 
 namespace sudoku.IO
 {
+    // writer interface
     public interface IWriter
     {
         // writes the output to the user

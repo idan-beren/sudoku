@@ -1,7 +1,7 @@
 ﻿using System;
 namespace sudoku.dancingLinks
 {
-	/* represents a dancing node */
+	/* represents a dancing node in the dlx list */
 	public class DancingNode
 	{
         public DancingNode left; // pointer to the node in the left

@@ -2,9 +2,10 @@
 using sudoku.exceptions;
 namespace sudoku.IO
 {
+    // class of reading the input from a file
     public class FileReader : IReader
     {
-        // gets an input from the user by a file and handles exceptions
+        // gets an input from the user by a file and handles exceptions. returns the input.
         public string ReadInput()
         {
             Console.WriteLine("enter the path of the file");

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace sudoku.dancingLinks
 {
-    /* represents a column node */
+    /* represents a column node in the dlx list */
 	public class ColumnNode : DancingNode
 	{
 		public int size; // amount of dancing nodes in the column

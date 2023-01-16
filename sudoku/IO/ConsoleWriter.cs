@@ -2,6 +2,7 @@
 
 namespace sudoku.IO
 {
+    // class of writing the solved grid string to the console
     public class ConsoleWriter : IWriter
     {
         /* gets a solution string grid and prints in into the console */

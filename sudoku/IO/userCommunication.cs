@@ -1,6 +1,7 @@
 ﻿using System;
 namespace sudoku.IO
 {
+    // class of handeling communication in the project - input and output
 	public class userCommunication
 	{
 		private string choice; // the choice of the user

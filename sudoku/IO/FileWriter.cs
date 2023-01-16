@@ -2,9 +2,11 @@
 using sudoku.exceptions;
 namespace sudoku.IO
 {
+    // class of writing the solved grid string to a file
     public class FileWriter : IWriter
     {
-        private const string path = "/Users/idan.beren/Projects/sudoku/sudoku/solutions/result.txt";
+        private static string basePath = AppDomain.CurrentDomain.BaseDirectory;
+        private static string fullPath = Path.Combine(Path.GetDirectoryName(basePath), "..", "..", "..", "solutions", "result.txt");
 
         /* gets a solution string grid and prints it into a file 
          and handles exceptions */
@@ -13,7 +15,7 @@ namespace sudoku.IO
             bool flag = true;
             try
             {
-                using (StreamWriter sw = new StreamWriter(path))
+                using (StreamWriter sw = new StreamWriter(fullPath))
                 {
                     sw.Write(output);
                 }

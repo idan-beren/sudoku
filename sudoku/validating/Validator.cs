@@ -3,6 +3,7 @@ using sudoku.exceptions;
 
 namespace sudoku.validating
 {
+    // class of validation in the project
     public class Validator
     {
         /* calls the validate functions on a string and throws an exception when they return false */

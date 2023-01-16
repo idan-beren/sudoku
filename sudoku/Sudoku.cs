@@ -35,7 +35,8 @@ namespace sudoku
             }
         }
 
-        /* reads input from the user and handles exceptions */
+        /* reads input from the user and handles exceptions. returns false if
+         an exception were occured, true otherwise */
         private bool Reading()
         {
             try
@@ -50,7 +51,8 @@ namespace sudoku
             return true;
         }
 
-        /* writes the solution grid and handles exceptions */
+        /* writes the solution grid and handles exceptions. returns false if
+         an exception were occured, true otherwise */
         private bool Writing()
         {
             try
@@ -65,7 +67,8 @@ namespace sudoku
             return true;
         }
 
-        /* solves the sudoku and handles exceptions */
+        /* solves the sudoku and handles exceptions. returns false if
+         an exception were occured, true otherwise */
         private bool Solving(string input)
         {
             try
@@ -80,7 +83,8 @@ namespace sudoku
             return true;
         }
 
-        /* validates the sudoku string and grid and handles exceptions */
+        /* validates the sudoku string and grid and handles exceptions. 
+         returns false if an exception were occured, true otherwise */
         private bool Validation(string input)
         {
             Validator validator = new Validator();
